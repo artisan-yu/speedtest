@@ -45,7 +45,7 @@ stat 100mb.txt
 
 ## 发布gitPage测试socks5下行速率
 ```bash
-url --socks5 127.0.0.1:7891 \
+curl --socks5 127.0.0.1:7891 \
      -o /dev/null \
      -w "总耗时: %{time_total}s\n平均速度: %{speed_download} B/s (约 %.2f MB/s)\n" \
      http://speedtest.holi.vip/10mb.txt
