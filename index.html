@@ -1,5 +1,10 @@
-<a href="10m.txt">10m.txt</a>
+<a href="https://speedtest.holi.vip/5mb.txt">5mb.txt</a>
+<a href="https://speedtest.holi.vip/10mb.txt">10mb.txt</a>
+<a href="https://speedtest.holi.vip/30mb.txt">30mb.txt</a>
+<a href="https://speedtest.holi.vip/50mb.txt">50mb.txt</a>
 
-<a href="30m.txt">30m.txt</a>
-
-<a href="50m.txt">50m.txt</a>
+<hr/>
+url --socks5 127.0.0.1:7891 \
+     -o /dev/null \
+     -w "总耗时: %{time_total}s\n平均速度: %{speed_download} B/s (约 %.2f MB/s)\n" \
+     http://speedtest.holi.vip/5mb.txt
