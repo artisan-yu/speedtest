@@ -3,166 +3,168 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Speed Test</title>
+     <meta charset="utf-8">
+     <title>Speed Test</title>
 
-    <style>
-        body {
-            max-width: 1000px;
-            margin: 20px auto;
-            font-family: system-ui;
-            padding: 0 20px;
-        }
+     <style>
+          body {
+               max-width: 1000px;
+               margin: 20px auto;
+               font-family: system-ui;
+               padding: 0 20px;
+          }
 
-        .files a {
-            display: inline-block;
-            margin-right: 10px;
-            padding: 6px 12px;
-            border-radius: 6px;
-            background: #f5f5f5;
-            text-decoration: none;
-        }
+          .files a {
+               display: inline-block;
+               margin-right: 10px;
+               padding: 6px 12px;
+               border-radius: 6px;
+               background: #f5f5f5;
+               text-decoration: none;
+          }
 
-        .files a:hover {
-            background: #eaeaea;
-        }
+          .files a:hover {
+               background: #eaeaea;
+          }
 
-        .panel {
-            margin-top: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-        }
+          .panel {
+               margin-top: 20px;
+               border: 1px solid #ddd;
+               border-radius: 8px;
+               padding: 20px;
+          }
 
-        button {
-            cursor: pointer;
-        }
+          button {
+               cursor: pointer;
+          }
 
-        #startBtn {
-            padding: 10px 20px;
-            font-size: 15px;
-        }
+          #startBtn {
+               padding: 10px 20px;
+               font-size: 15px;
+          }
 
-        .progress {
-            width: 100%;
-            height: 18px;
-            background: #eee;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 15px;
-        }
+          .progress {
+               width: 100%;
+               height: 18px;
+               background: #eee;
+               border-radius: 10px;
+               overflow: hidden;
+               margin-top: 15px;
+          }
 
-        .bar {
-            height: 100%;
-            width: 0%;
-            background: #4caf50;
-            transition: width .2s;
-        }
+          .bar {
+               height: 100%;
+               width: 0%;
+               background: #4caf50;
+               transition: width .2s;
+          }
 
-        .result {
-            margin-top: 15px;
-            line-height: 1.8;
-            white-space: pre-line;
-        }
+          .result {
+               margin-top: 15px;
+               line-height: 1.8;
+               white-space: pre-line;
+               font-family: Consolas, Monaco, monospace;
+               font-size: 15px;
+          }
 
-        .code-box {
-            position: relative;
-            background: #0d1117;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-top: 15px;
-        }
+          .code-box {
+               position: relative;
+               background: #0d1117;
+               border-radius: 8px;
+               overflow: hidden;
+               margin-top: 15px;
+          }
 
-        .code-box pre {
-            margin: 0;
-            padding: 16px;
-            overflow-x: auto;
-            color: #c9d1d9;
-            font-family: Consolas, Monaco, monospace;
-            line-height: 1.5;
-        }
+          .code-box pre {
+               margin: 0;
+               padding: 16px;
+               overflow-x: auto;
+               color: #c9d1d9;
+               font-family: Consolas, Monaco, monospace;
+               line-height: 1.5;
+          }
 
-        .copy-btn {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-        }
+          .copy-btn {
+               position: absolute;
+               right: 10px;
+               top: 10px;
+          }
 
-        .active-file {
-            background: #4caf50 !important;
-            color: white;
-        }
-    </style>
+          .active-file {
+               background: #4caf50 !important;
+               color: white;
+          }
+     </style>
 </head>
 
 <body>
 
-    <h2>🚀 Holi Speed Test</h2>
+     <h2>🚀 Holi Speed Test</h2>
 
-    <div class="files">
-        <a href="5mb.txt" data-size="5">5MB</a>
-        <a href="10mb.txt" data-size="10">10MB</a>
-        <a href="30mb.txt" data-size="30">30MB</a>
-        <a href="50mb.txt" data-size="50" class="active-file">50MB</a>
-    </div>
+     <div class="files">
+          <a href="5mb.txt" data-size="5">5MB</a>
+          <a href="10mb.txt" data-size="10">10MB</a>
+          <a href="30mb.txt" data-size="30">30MB</a>
+          <a href="50mb.txt" data-size="50" class="active-file">50MB</a>
+     </div>
 
-    <div class="panel">
+     <div class="panel">
 
-        <h3>🌐 浏览器测速</h3>
+          <h3>🌐 浏览器测速</h3>
 
-        <button id="startBtn">
-            开始测速
-        </button>
+          <button id="startBtn">
+               开始测速
+          </button>
 
-        <div class="progress">
-            <div class="bar" id="bar"></div>
-        </div>
+          <div class="progress">
+               <div class="bar" id="bar"></div>
+          </div>
 
-        <div class="result" id="result">
-            点击开始测速
-        </div>
+          <div class="result" id="result">
+               点击开始测速
+          </div>
 
-    </div>
+     </div>
 
-    <div class="panel">
+     <div class="panel">
 
-        <h3>🖥 Curl测速</h3>
+          <h3>🖥 Curl测速</h3>
 
-        <div class="code-box">
-            <button class="copy-btn" id="copyBtn">
-                复制命令
-            </button>
+          <div class="code-box">
+               <button class="copy-btn" id="copyBtn">
+                    复制命令
+               </button>
 
-            <pre><code id="code"></code></pre>
-        </div>
+               <pre><code id="code"></code></pre>
+          </div>
 
-    </div>
+     </div>
 
-    <script>
+     <script>
 
-        let currentFile = "50mb.txt";
+          let currentFile = "50mb.txt";
 
-        const links = document.querySelectorAll(".files a");
+          const links = document.querySelectorAll(".files a");
 
-        links.forEach(link => {
+          links.forEach(link => {
 
-            link.addEventListener("click", e => {
+               link.addEventListener("click", e => {
 
-                links.forEach(x => x.classList.remove("active-file"));
+                    links.forEach(x => x.classList.remove("active-file"));
 
-                link.classList.add("active-file");
+                    link.classList.add("active-file");
 
-                currentFile = link.getAttribute("href");
+                    currentFile = link.getAttribute("href");
 
-                updateCurl();
+                    updateCurl();
 
-            });
+               });
 
-        });
+          });
 
-        function buildCurl(file) {
+          function buildCurl(file) {
 
-            return String.raw`curl --socks5 127.0.0.1:7897 \
+               return String.raw`curl --socks5 127.0.0.1:7897 \
   --max-time 8 \
   -o /dev/null \
   -s \
@@ -179,7 +181,7 @@ awk '{
     else if(mbps>=1) grade="★☆☆☆☆ 拉垮";
     else grade="☆☆☆☆☆ 垃圾";
 
-    printf "\n📦 文件大小: %.2f MB\n", $1/1024/1024;
+     printf "\n📦 文件大小: %.2f MB\n", $1/1024/1024;
     printf "🌐 DNS解析: %.3fs\n", $2;
     printf "🤝 TCP连接: %.3fs\n", $3;
     printf "📥 首包时间: %.3fs\n", $4;
@@ -188,128 +190,140 @@ awk '{
     printf "📊 线路评级: %s\n", grade;
 }'`;
 
-        }
+          }
 
-        function updateCurl() {
+          function updateCurl() {
 
-            const cmd = buildCurl(currentFile);
+               const cmd = buildCurl(currentFile);
 
-            document.getElementById("code").textContent = cmd;
+               document.getElementById("code").textContent = cmd;
 
-            document.getElementById("copyBtn").onclick = async () => {
+               document.getElementById("copyBtn").onclick = async () => {
 
-                await navigator.clipboard.writeText(cmd);
+                    await navigator.clipboard.writeText(cmd);
 
-                copyBtn.innerText = "已复制";
+                    copyBtn.innerText = "已复制";
 
-                setTimeout(() => {
+                    setTimeout(() => {
 
-                    copyBtn.innerText = "复制命令";
+                         copyBtn.innerText = "复制命令";
 
-                }, 2000);
+                    }, 2000);
 
-            };
+               };
 
-        }
+          }
 
-        updateCurl();
+          updateCurl();
 
-        function grade(mbps) {
+          function grade(mbps) {
 
-            if (mbps >= 500) return "★★★★★ 夯爆";
-            if (mbps >= 200) return "★★★★☆ 好用";
-            if (mbps >= 50) return "★★★☆☆ 够用";
-            if (mbps >= 10) return "★★☆☆☆ 能用";
-            if (mbps >= 1) return "★☆☆☆☆ 拉垮";
+               if (mbps >= 500) return "★★★★★ 夯爆";
+               if (mbps >= 200) return "★★★★☆ 好用";
+               if (mbps >= 50) return "★★★☆☆ 够用";
+               if (mbps >= 10) return "★★☆☆☆ 能用";
+               if (mbps >= 1) return "★☆☆☆☆ 拉垮";
 
-            return "☆☆☆☆☆ 垃圾";
-        }
+               return "☆☆☆☆☆ 垃圾";
+          }
 
-        document.getElementById("startBtn").onclick = async () => {
+          document.getElementById("startBtn").onclick = async () => {
 
-            const btn = document.getElementById("startBtn");
+               const btn = document.getElementById("startBtn");
 
-            btn.disabled = true;
+               btn.disabled = true;
 
-            const result = document.getElementById("result");
+               const result = document.getElementById("result");
 
-            const bar = document.getElementById("bar");
+               const bar = document.getElementById("bar");
 
-            result.innerHTML = "测速中...";
+               result.innerHTML = "测速中...";
 
-            bar.style.width = "0%";
+               bar.style.width = "0%";
 
-            const TEST_TIME = 8000;
+               const TEST_TIME = 8000;
 
-            const start = performance.now();
+               const start = performance.now();
 
-            const resp = await fetch(
-                currentFile + "?t=" + Date.now()
-            );
+               const resp = await fetch(
+                    currentFile + "?t=" + Date.now()
+               );
 
-            const reader = resp.body.getReader();
+               const reader = resp.body.getReader();
 
-            let downloaded = 0;
+               let downloaded = 0;
 
-            while (true) {
+               while (true) {
 
-                const { done, value } =
-                    await reader.read();
+                    const { done, value } =
+                         await reader.read();
 
-                if (done)
-                    break;
+                    if (done)
+                         break;
 
-                downloaded += value.length;
+                    downloaded += value.length;
 
-                const elapsed =
-                    performance.now() - start;
+                    const elapsed =
+                         performance.now() - start;
 
-                const progress =
-                    Math.min(
-                        elapsed / TEST_TIME * 100,
-                        100
-                    );
+                    const progress =
+                         Math.min(
+                              elapsed / TEST_TIME * 100,
+                              100
+                         );
 
-                bar.style.width =
-                    progress + "%";
+                    bar.style.width =
+                         progress + "%";
 
-                const mbps =
-                    downloaded * 8 /
-                    (elapsed / 1000) /
-                    1000000;
 
-                result.innerHTML =
-                    `📥 已下载 ${(downloaded / 1024 / 1024).toFixed(2)} MB
-🚀 当前速度 ${mbps.toFixed(1)} Mbps`;
-                
-                if (elapsed >= TEST_TIME) {
+                    const fileSizeMB =
+                         downloaded / 1024 / 1024;
 
-                    reader.cancel();
+                    const speedMBs =
+                         fileSizeMB /
+                         (elapsed / 1000);
 
-                    break;
-                }
-            }
+                    const speedMbps =
+                         speedMBs * 8;
 
-            const elapsed =
-                (performance.now() - start) / 1000;
+                    result.innerHTML =
+                         `📦 文件大小: ${fileSizeMB.toFixed(2)} MB
+⏱️ 总耗时: ${(elapsed / 1000).toFixed(3)}s
+🚀 当前速度: ${speedMBs.toFixed(2)} MB/s (${speedMbps.toFixed(0)} Mbps)`;
 
-            const avgMbps =
-                downloaded * 8 /
-                elapsed /
-                1000000;
 
-            result.innerHTML =
-`📦 下载量: ${(downloaded / 1024 / 1024).toFixed(2)} MB
-⏱️ 测试时长: ${elapsed.toFixed(2)} 秒
-🚀 平均速度: ${avgMbps.toFixed(1)} Mbps
-📊 评级: ${grade(avgMbps)}`;
+                    if (elapsed >= TEST_TIME) {
 
-            bar.style.width = "100%";
+                         reader.cancel();
 
-            btn.disabled = false;
-        };
+                         break;
+                    }
+               }
 
-    </script>
+               const elapsed =
+                    (performance.now() - start) / 1000;
+
+               const fileSizeMB =
+                    downloaded / 1024 / 1024;
+
+               const speedMBs =
+                    fileSizeMB / elapsed;
+
+               const speedMbps =
+                    speedMBs * 8;
+
+               result.innerHTML =
+                    `📦 文件大小: ${fileSizeMB.toFixed(2)} MB
+⏱️ 总耗时: ${elapsed.toFixed(3)}s
+🚀 平均速度: ${speedMBs.toFixed(2)} MB/s (${speedMbps.toFixed(0)} Mbps)
+📊 线路评级: ${grade(speedMbps)}`;
+
+               bar.style.width = "100%";
+
+               btn.disabled = false;
+          };
+
+     </script>
 
 </body>
 
