@@ -48,5 +48,5 @@ stat 100mb.txt
 url --socks5 127.0.0.1:7891 \
      -o /dev/null \
      -w "总耗时: %{time_total}s\n平均速度: %{speed_download} B/s (约 %.2f MB/s)\n" \
-     http://speedtest.holi.vip/10m.txt
+     http://speedtest.holi.vip/10mb.txt
 ```
