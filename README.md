@@ -45,8 +45,26 @@ stat 100mb.txt
 
 ## 发布gitPage测试socks5下行速率
 ```bash
-curl --socks5 127.0.0.1:7891 \
-     -o /dev/null \
-     -w "总耗时: %{time_total}s\n平均速度: %{speed_download} B/s (约 %.2f MB/s)\n" \
-     http://speedtest.holi.vip/10mb.txt
+curl --socks5 127.0.0.1:7897 \
+  --max-time 8 -o /dev/null -s \
+  -w "%{size_download} %{time_namelookup} %{time_connect} %{time_starttransfer} %{time_total} %{speed_download}\n" \
+  https://speedtest.holi.vip/50mb.txt | \
+awk '{
+    mbs=$6/1024/1024;
+    mbps=$6*8/1000000;
+    if(mbps>=500) grade="★★★★★ 夯爆";
+    else if(mbps>=200) grade="★★★★☆ 好用";
+    else if(mbps>=50) grade="★★★☆☆ 够用";
+    else if(mbps>=10) grade="★★☆☆☆ 能用";
+    else if(mbps>=1) grade="★☆☆☆☆ 拉垮";
+    else grade="☆☆☆☆☆ 垃圾";
+    
+    printf "\n📦 文件大小: %.2f MB\n", $1/1024/1024;
+    printf "🌐 DNS解析: %.3fs\n", $2;
+    printf "🤝 TCP连接: %.3fs\n", $3;
+    printf "📥 首包时间: %.3fs\n", $4;
+    printf "⏱️ 总耗时: %.3fs\n", $5;
+    printf "🚀 平均速度: %.2f MB/s (%.0f Mbps)\n", mbs, mbps;
+    printf "📊 线路评级: %s\n", grade;
+}'
 ```
