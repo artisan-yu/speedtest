@@ -6,6 +6,6 @@
 <hr/>
 
 <script>
-     let str=`url --socks5 127.0.0.1:7891 -o /dev/null -w "总耗时: %{time_total}s\n平均速度: %{speed_download} B/s (约 %.2f MB/s)\n" http://${location.hostname}/5mb.txt`
+     let str=`curl --socks5 127.0.0.1:7891 -o /dev/null -w "总耗时: %{time_total}s\n平均速度: %{speed_download} B/s (约 %.2f MB/s)\n" http://${location.hostname}/5mb.txt`
      document.write(`<div>${str}</div>`)
 </script>
