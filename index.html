@@ -254,8 +254,8 @@ awk '{
 
                let downloaded = 0;
 
-               let lastBytes = 0;
-               let lastTime = start;
+               const WINDOW = 1000;
+               const samples = [];
 
                while (true) {
 
@@ -280,14 +280,16 @@ awk '{
                     bar.style.width =
                          progress + "%";
 
-                    const deltaBytes = downloaded - lastBytes;
-                    const deltaTime = (now - lastTime) / 1000;
+                    samples.push({ t: now, b: downloaded });
+                    while (samples.length > 1 && samples[0].t < now - WINDOW) {
+                         samples.shift();
+                    }
 
-                    const instantMbps = (deltaBytes * 8) / deltaTime / 1000000;
-                    const instantMBs = instantMbps / 8;
-
-                    lastBytes = downloaded;
-                    lastTime = now;
+                    const old = samples[0];
+                    const windowBytes = downloaded - old.b;
+                    const windowSec = (now - old.t) / 1000;
+                    const speedMBs = windowBytes / 1024 / 1024 / windowSec;
+                    const speedMbps = speedMBs * 8;
 
                     const fileSizeMB =
                          downloaded / 1024 / 1024;
@@ -295,7 +297,7 @@ awk '{
                     result.innerHTML =
                          `📦 文件大小: ${fileSizeMB.toFixed(2)} MB
 ⏱️ 总耗时: ${elapsed.toFixed(3)}s
-🚀 当前速度: ${instantMBs.toFixed(2)} MB/s (${instantMbps.toFixed(0)} Mbps)`;
+🚀 当前速度: ${speedMBs.toFixed(2)} MB/s (${speedMbps.toFixed(0)} Mbps)`;
 
 
                     if (elapsedMs >= TEST_TIME) {
