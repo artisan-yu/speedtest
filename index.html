@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html>
 
@@ -198,7 +197,9 @@ awk '{
 
                document.getElementById("code").textContent = cmd;
 
-               document.getElementById("copyBtn").onclick = async () => {
+               const copyBtn = document.getElementById("copyBtn");
+
+               copyBtn.onclick = async () => {
 
                     await navigator.clipboard.writeText(cmd);
 
@@ -253,6 +254,9 @@ awk '{
 
                let downloaded = 0;
 
+               let lastBytes = 0;
+               let lastTime = start;
+
                while (true) {
 
                     const { done, value } =
@@ -263,36 +267,38 @@ awk '{
 
                     downloaded += value.length;
 
-                    const elapsed =
-                         performance.now() - start;
+                    const now = performance.now();
+                    const elapsedMs = now - start;
+                    const elapsed = elapsedMs / 1000;
 
                     const progress =
                          Math.min(
-                              elapsed / TEST_TIME * 100,
+                              elapsedMs / TEST_TIME * 100,
                               100
                          );
 
                     bar.style.width =
                          progress + "%";
 
+                    const deltaBytes = downloaded - lastBytes;
+                    const deltaTime = (now - lastTime) / 1000;
+
+                    const instantMbps = (deltaBytes * 8) / deltaTime / 1000000;
+                    const instantMBs = instantMbps / 8;
+
+                    lastBytes = downloaded;
+                    lastTime = now;
 
                     const fileSizeMB =
                          downloaded / 1024 / 1024;
 
-                    const speedMBs =
-                         fileSizeMB /
-                         (elapsed / 1000);
-
-                    const speedMbps =
-                         speedMBs * 8;
-
                     result.innerHTML =
                          `📦 文件大小: ${fileSizeMB.toFixed(2)} MB
-⏱️ 总耗时: ${(elapsed / 1000).toFixed(3)}s
-🚀 当前速度: ${speedMBs.toFixed(2)} MB/s (${speedMbps.toFixed(0)} Mbps)`;
+⏱️ 总耗时: ${elapsed.toFixed(3)}s
+🚀 当前速度: ${instantMBs.toFixed(2)} MB/s (${instantMbps.toFixed(0)} Mbps)`;
 
 
-                    if (elapsed >= TEST_TIME) {
+                    if (elapsedMs >= TEST_TIME) {
 
                          reader.cancel();
 
@@ -328,4 +334,3 @@ awk '{
 </body>
 
 </html>
-```
